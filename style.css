@@ -1,0 +1,13 @@
+body {
+    background-color: rgb(185, 178, 178);
+}
+
+
+.h1 {
+    font-size: 36px;
+}
+
+.searched-city:hover {
+    cursor: pointer;
+    background-color: lightgrey;
+}

@@ -104,11 +104,11 @@ var displayCurrentData = function(city, data) {
 };
 
 var displayForecastData = function(data) {
-    console.log(data)
+    console.log(data);
    
     forecastContainerEl.textContent = "";
     var forecastHeaderEl = document.getElementById("five-day");
-    forecastHeaderEl.textContent = "5-day Forecast:"
+    forecastHeaderEl.textContent = "5-day Forecast:";
 
     for (var i=1; i < 6; i++) {
         var tempForecast = Math.round(data.daily[i].temp.day);
@@ -150,7 +150,7 @@ var displayForecastData = function(data) {
 };
 
 var getCityData = function(city) {
-    event.preventDefault();
+    
     
     var cityInfoUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + APIkey;
 
@@ -184,8 +184,16 @@ var getCityData = function(city) {
 };
 
 var getWeatherData = function(city,latitude,longitude) { 
-    var forecastUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&units=imperial&exclude=minutely,hourly&appid=" + APIkey;
-        
+    var forecastUrl = //"https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&units=imperial&exclude=minutely,hourly&appid=" + APIkey;
+    //`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIkey}`;
+    `https://api.openweathermap.org/data/2.5/forecast/?lat=${latitude}&lon=${longitude}&appid=${APIkey}`;
+    console.log({
+        city:city,
+        lat: latitude,
+        long: longitude
+    })
+    console.log(forecastUrl)
+
     fetch(forecastUrl).then(function(response) {
         response.json().then(function(data) {
             console.log(data);
@@ -201,9 +209,13 @@ var getWeatherData = function(city,latitude,longitude) {
 loadCities()
 
 
-cityFormEl.addEventListener("submit", function() {
+// cityFormEl.addEventListener("submit", function() {
+//     cityInputEl = cityInputEl.value.trim();
+//     getCityData(cityInputEl);
+// })
+
+searchEl.addEventListener("click", function() {
+   console.log(cityInputEl);
     cityInputEl = cityInputEl.value.trim();
-    getCityData(cityInputEl);
+     getCityData(cityInputEl);
 })
-
-
